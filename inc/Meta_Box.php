@@ -62,14 +62,12 @@ class Meta_Box{
 		}
 
 		// Check the user's permissions.
-		if ( isset( $_POST['post_type'] ) && in_array( $_POST['post_type'], self::$cpts ) ) {
-			if ( ! current_user_can( 'edit_page', $post_id ) ) {
-					return;
-			}
-		} else {
-			if ( ! current_user_can( 'edit_post', $post_id ) ) {
-					return;
-			}
+		if (
+			isset( $_POST['post_type'] ) &&
+			! in_array( $_POST['post_type'], self::$cpts ) &&
+			! current_user_can( 'edit_page', $post_id )
+		) {
+			return;
 		}
 
 		/* OK, it's safe for us to save the data now. */
