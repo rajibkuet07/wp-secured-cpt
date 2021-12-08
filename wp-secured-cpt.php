@@ -29,7 +29,7 @@ Meta_Box::init();
 add_action( 'template_redirect', function() {
 	if ( ! is_singular() ) return;
 	if ( is_user_logged_in() ) return;
-	if ( !get_post_meta( get_the_ID(), 'pic_login_required', true  ) ) return;
+	if ( ! get_post_meta( get_the_ID(), '_restrict_cpt', true  ) ) return;
 
 	$permalink = get_permalink();
 	wp_redirect( wp_login_url( $permalink ) );
